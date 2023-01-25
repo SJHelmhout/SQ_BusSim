@@ -62,24 +62,27 @@ public class Infobord extends Application{
 		pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
 		pane.setHgap(5.5);
 		pane.setVgap(5.5);
-
-		// Place nodes in the pane
-		pane.add(new Label("Voor het laatst bijgewerkt op :"), 0, 0); 
-		pane.add(tijdRegel, 1, 0); 
-		pane.add(new Label("1:"), 0, 1); 
-		pane.add(infoRegel1, 1, 1);
-		pane.add(new Label("2:"), 0, 2); 
-		pane.add(infoRegel2, 1, 2);
-		pane.add(new Label("3:"), 0, 3); 
-		pane.add(infoRegel3, 1, 3);
-		pane.add(new Label("4:"), 0, 4); 
-		pane.add(infoRegel4, 1, 4);
+		setLabelsToPane(pane);
 		// Create a scene and place it in the stage
 		Scene scene = new Scene(pane,500,150);
 		primaryStage.setTitle(titel); // Set the stage title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.show(); // Display the stage
 	}
+
+	private void setLabelsToPane(GridPane pane){
+		pane.add(new Label("Voor het laatst bijgewerkt op :"), 0, 0);
+		pane.add(tijdRegel, 1, 0);
+		pane.add(new Label("1:"), 0, 1);
+		pane.add(infoRegel1, 1, 1);
+		pane.add(new Label("2:"), 0, 2);
+		pane.add(infoRegel2, 1, 2);
+		pane.add(new Label("3:"), 0, 3);
+		pane.add(infoRegel3, 1, 3);
+		pane.add(new Label("4:"), 0, 4);
+		pane.add(infoRegel4, 1, 4);
+	}
+
 
 	public void thread(Runnable runnable, boolean daemon) {
 		Thread brokerThread = new Thread(runnable);
