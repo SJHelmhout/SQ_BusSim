@@ -8,14 +8,12 @@ import tijdtools.TijdFuncties;
 
 public class Runner implements Runnable {
 
-	private static HashMap<Integer,ArrayList<Bus>> busStart = new HashMap<Integer,ArrayList<Bus>>();
-	private static ArrayList<Bus> actieveBussen = new ArrayList<Bus>();
-	private static int interval=1000;
-	private static int syncInterval=5;
+	private static HashMap<Integer,ArrayList<Bus>> busStart = new HashMap<>();
+	private static ArrayList<Bus> actieveBussen = new ArrayList<>();
 	private static BusFactory busFactory;
 
 	private static void addBus(int starttijd, Bus bus){
-		ArrayList<Bus> bussen = new ArrayList<Bus>();
+		ArrayList<Bus> bussen = new ArrayList<>();
 		if (busStart.containsKey(starttijd)) {
 			bussen = busStart.get(starttijd);
 		}
@@ -95,20 +93,21 @@ public class Runner implements Runnable {
 //
 	@Override
 	public void run() {
-		int tijd=0;
-		int counter=0;
-		TijdFuncties tijdFuncties = new TijdFuncties();
-		tijdFuncties.initSimulatorTijden(interval,syncInterval);
+		int tijd;
+		int counter;
+		int interval = 1000;
+		int syncInterval = 5;
+		TijdFuncties.initSimulatorTijden(interval, syncInterval);
 		int volgende = initBussen();
 		while ((volgende>=0) || !actieveBussen.isEmpty()) {
-			counter=tijdFuncties.getCounter();
-			tijd=tijdFuncties.getTijdCounter();
-			System.out.println("De tijd is:" + tijdFuncties.getSimulatorWeergaveTijd());
+			counter = TijdFuncties.getCounter();
+			tijd= TijdFuncties.getTijdCounter();
+			System.out.println("De tijd is:" + TijdFuncties.getSimulatorWeergaveTijd());
 			volgende = (counter==volgende) ? startBussen(counter) : volgende;
 			moveBussen(tijd);
 			sendETAs(tijd);
 			try {
-				tijdFuncties.simulatorStep();
+				TijdFuncties.simulatorStep();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

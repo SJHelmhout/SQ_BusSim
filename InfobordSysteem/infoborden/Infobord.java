@@ -9,10 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import tijdtools.InfobordTijdFuncties;
+import tijdtools.TijdFuncties;
 
 public class Infobord extends Application{
-	private String titel = "Bushalte XX in richting YY";
+	private String titel;
 	private Text tijdRegel = new Text("00:00:00");
 	private Text infoRegel1 = new Text("De eestevolgende bus");
 	private Text infoRegel2 = new Text("De tweede bus");
@@ -33,23 +33,17 @@ public class Infobord extends Application{
 		if (berichten.hetBordMoetVerverst()) {
 			String[] infoTekstRegels = berichten.repaintInfoBordValues();
 			//Deze code hoort bij opdracht 3
-			InfobordTijdFuncties tijdfuncties = new InfobordTijdFuncties();
-			String tijd = tijdfuncties.getCentralTime().toString();
+			String tijd = TijdFuncties.getCentralTime().toString();
 			tijdRegel.setText(tijd);
 			infoRegel1.setText(infoTekstRegels[0]);
 			infoRegel2.setText(infoTekstRegels[1]);
 			infoRegel3.setText(infoTekstRegels[2]);
 			infoRegel4.setText(infoTekstRegels[3]);
-		};
+		}
 	}
 
 	public void updateBord() {
-		Runnable updater = new Runnable() {
-			@Override
-			public void run() {
-				verwerkBericht();	
-			}
-		};
+		Runnable updater = this::verwerkBericht;
 		Platform.runLater(updater);
 	}
 
