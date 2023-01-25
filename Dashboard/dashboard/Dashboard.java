@@ -14,9 +14,6 @@ import javafx.stage.Stage;
 import mockDatabaseLogger.ArrivaLogger;
 import infoborden.Infobord;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import bussimulator.Runner;
 
 public class Dashboard extends Application {
@@ -29,11 +26,7 @@ public class Dashboard extends Application {
     
     private void startBord(String halte, String richting) {
 		Infobord infobord = new Infobord(halte,richting);
-		Platform.runLater(new Runnable() {
-			public void run() {             
-				infobord.start(new Stage());
-			}
-		});	    	
+		Platform.runLater(() -> infobord.start(new Stage()));
     }
 	private void startAlles() {
 		thread(new Runner(),false); 
@@ -43,6 +36,14 @@ public class Dashboard extends Application {
 	public void start(Stage primaryStage) {
 		// Create a pane and set its properties
 		GridPane pane = new GridPane();
+		setPaneOptions(pane);
+		Scene scene = new Scene(pane);
+		primaryStage.setTitle("BusSimulatie control-Center");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	private void setPaneOptions(GridPane pane){
 		pane.setAlignment(Pos.CENTER);
 		pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
 		pane.setHgap(5.5);
@@ -53,27 +54,22 @@ public class Dashboard extends Application {
 		pane.add(new Label("Richting:"), 0, 1);
 		TextField richting = new TextField("1 of -1");
 		pane.add(richting, 1, 1);
+		setPaneButtons(pane, halteInput, richting);
+	}
+
+	private void setPaneButtons(GridPane pane, TextField halteInput, TextField richting){
 		Button btBord = new Button("Start Bord");
-		btBord.setOnAction(e -> {
-			startBord(halteInput.getText(), richting.getText());
-		});
+		btBord.setOnAction(e -> startBord(halteInput.getText(), richting.getText()));
 		Button btStart = new Button("Start");
-		btStart.setOnAction( e -> {
-			startAlles();
-		});
+		btStart.setOnAction( e -> startAlles());
 		Button btLogger = new Button("Start Logger");
-		btLogger.setOnAction( e -> {
-			thread(new ArrivaLogger(), false);
-		});
+		btLogger.setOnAction( e -> thread(new ArrivaLogger(), false));
 		pane.add(btBord, 1, 5);
 		pane.add(btStart, 2, 5);
 		pane.add(btLogger, 3, 5);
+
 		GridPane.setHalignment(btBord, HPos.LEFT);
 		GridPane.setHalignment(btStart, HPos.LEFT);
 		GridPane.setHalignment(btLogger, HPos.LEFT);
-		Scene scene = new Scene(pane);
-		primaryStage.setTitle("BusSimulatie control-Center");
-		primaryStage.setScene(scene);
-		primaryStage.show();
 	}
 } 
