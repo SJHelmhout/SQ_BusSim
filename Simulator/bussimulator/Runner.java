@@ -34,15 +34,15 @@ public class Runner implements Runnable {
 			Bus bus = itr.next();
 			boolean eindpuntBereikt = bus.move();
 			if (eindpuntBereikt) {
-				bus.sendLastETA(nu);
+				ETA.sendLastETA(nu, bus);
 				itr.remove();
 			}
-		}		
+		}
 	}
 
 	public static void sendETAs(int nu){
 		for (Bus bus : actieveBussen) {
-			bus.sendETAs(nu);
+			ETA.sendETAs(nu, bus);
 		}				
 	}
 

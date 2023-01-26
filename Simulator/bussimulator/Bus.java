@@ -55,56 +55,47 @@ public class Bus{
 		naarVolgendeHalte();
 	}
 	
-	public boolean move(){
+	public boolean move() {
 		boolean eindpuntBereikt = false;
-		bijHalte=false;
+		bijHalte = false;
 		if (halteNummer == -1) {
 			start();
-		}
-		else {
+		} else {
 			totVolgendeHalte--;
-			if (totVolgendeHalte==0){
-				eindpuntBereikt=halteBereikt();
+			if (totVolgendeHalte == 0) {
+				eindpuntBereikt = halteBereikt();
 			}
 		}
 		return eindpuntBereikt;
 	}
-	
-	public void sendETAs(int nu){
-		int i=0;
-		Bericht bericht = new Bericht(lijn.name(),bedrijf.name(),busID,nu);
-		if (bijHalte) {
-			ETA eta = new ETA(lijn.getHalte(halteNummer).name(),lijn.getRichting(halteNummer)*richting,0);
-			bericht.ETAs.add(eta);
-		}
-		Positie eerstVolgende=lijn.getHalte(halteNummer+richting).getPositie();
-		int tijdNaarHalte=totVolgendeHalte+nu;
-		for (i = halteNummer+richting ; !(i>=lijn.getLengte()) && !(i < 0); i=i+richting ){
-			tijdNaarHalte+= lijn.getHalte(i).afstand(eerstVolgende);
-			ETA eta = new ETA(lijn.getHalte(i).name(), lijn.getRichting(i)*richting,tijdNaarHalte);
-//			System.out.println(bericht.lijnNaam + " naar halte" + eta.halteNaam + " t=" + tijdNaarHalte);
-			bericht.ETAs.add(eta);
-			eerstVolgende=lijn.getHalte(i).getPositie();
-		}
-		bericht.eindpunt=lijn.getHalte(i-richting).name();
-		sendBericht(bericht);
-	}
-	
-	public void sendLastETA(int nu){
-		Bericht bericht = new Bericht(lijn.name(),bedrijf.name(),busID,nu);
-		String eindpunt = lijn.getHalte(halteNummer).name();
-		ETA eta = new ETA(eindpunt,lijn.getRichting(halteNummer)*richting,0);
-		bericht.ETAs.add(eta);
-		bericht.eindpunt = eindpunt;
-		sendBericht(bericht);
+
+	public Bedrijven getBedrijf() {
+		return bedrijf;
 	}
 
-	public void sendBericht(Bericht bericht){
-    	XStream xstream = new XStream();
-    	xstream.alias("Bericht", Bericht.class);
-    	xstream.alias("ETA", ETA.class);
-    	String xml = xstream.toXML(bericht);
-    	Producer producer = new Producer();
-    	producer.sendBericht(xml);		
+	public Lijnen getLijn() {
+		return lijn;
 	}
+
+	public int getHalteNummer() {
+		return halteNummer;
+	}
+
+	public int getTotVolgendeHalte() {
+		return totVolgendeHalte;
+	}
+
+	public int getRichting() {
+		return richting;
+	}
+
+	public boolean isBijHalte() {
+		return bijHalte;
+	}
+
+	public String getBusID() {
+		return busID;
+	}
+
+
 }
