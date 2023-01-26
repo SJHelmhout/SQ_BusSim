@@ -91,27 +91,26 @@ public class Runner implements Runnable {
 //	}
 //	Om de tijdsynchronisatie te gebruiken moet de onderstaande run() gebruikt worden
 //
+	private int setTijdBus(int volgendeBus){
+		int counter = TijdFuncties.getCounter();
+		int tijd = TijdFuncties.getTijdCounter();
+		System.out.println("De tijd is:" + TijdFuncties.getSimulatorWeergaveTijd());
+		moveBussen(tijd);
+		sendETAs(tijd);
+		try {
+			TijdFuncties.simulatorStep();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return (counter==volgendeBus) ? startBussen(counter) : volgendeBus;
+	}
+
 	@Override
 	public void run() {
-		int tijd;
-		int counter;
-		int interval = 1000;
-		int syncInterval = 5;
-		TijdFuncties.initSimulatorTijden(interval, syncInterval);
-		int volgende = initBussen();
-		while ((volgende>=0) || !actieveBussen.isEmpty()) {
-			counter = TijdFuncties.getCounter();
-			tijd= TijdFuncties.getTijdCounter();
-			System.out.println("De tijd is:" + TijdFuncties.getSimulatorWeergaveTijd());
-			volgende = (counter==volgende) ? startBussen(counter) : volgende;
-			moveBussen(tijd);
-			sendETAs(tijd);
-			try {
-				TijdFuncties.simulatorStep();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		TijdFuncties.initSimulatorTijden(1000, 5);
+		int volgendeBus = initBussen();
+		while ((volgendeBus>=0) || !actieveBussen.isEmpty()) {
+			volgendeBus = setTijdBus(volgendeBus);
 		}
 	}
 }
