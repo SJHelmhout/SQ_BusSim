@@ -1,7 +1,6 @@
 package bussimulator;
 
 public enum Lijnen {
-	
 	LIJN1 (new Stop(Halte.A,1),new Stop(Halte.B,1),new Stop(Halte.C,1),
 			new Stop(Halte.D,1),new Stop(Halte.E,1),new Stop(Halte.F,1),new Stop(Halte.G,1)),
 	LIJN2 (new Stop(Halte.H,1),new Stop(Halte.E,1),new Stop(Halte.I,1),
