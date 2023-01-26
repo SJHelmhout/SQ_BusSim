@@ -11,7 +11,6 @@ public class TijdFuncties {
 	private static int syncInterval;
 	private static int syncCounter;
 
-
 	public static void initSimulatorTijden(int interval, int syncInterval){
 		simulatorTijd =new Tijd(0,0,0);
 		Tijd startTijd = getCentralTime();
@@ -84,8 +83,4 @@ public class TijdFuncties {
 			return new Tijd(0,0,0);
 		}
 	}
-
-
-
-
 }

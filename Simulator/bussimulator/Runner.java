@@ -54,21 +54,21 @@ public class Runner implements Runnable {
 	}
 
 	public static void createBus(int direction){
-		addBus(3, busFactory.createBus(Lijnen.LIJN1, Bedrijven.ARRIVA, direction));
-		addBus(5, busFactory.createBus(Lijnen.LIJN2, Bedrijven.ARRIVA, direction));
-		addBus(4, busFactory.createBus(Lijnen.LIJN3, Bedrijven.ARRIVA, direction));
-		addBus(6, busFactory.createBus(Lijnen.LIJN4, Bedrijven.ARRIVA, direction));
-		addBus(3, busFactory.createBus(Lijnen.LIJN5, Bedrijven.FLIXBUS, direction));
-		addBus(5, busFactory.createBus(Lijnen.LIJN6, Bedrijven.QBUZZ, direction));
-		addBus(4, busFactory.createBus(Lijnen.LIJN7, Bedrijven.QBUZZ, direction));
-		addBus(6, busFactory.createBus(Lijnen.LIJN1, Bedrijven.ARRIVA, direction));
-		addBus(12, busFactory.createBus(Lijnen.LIJN4, Bedrijven.ARRIVA, direction));
-		addBus(10, busFactory.createBus(Lijnen.LIJN5, Bedrijven.FLIXBUS, direction));
-		addBus(3, busFactory.createBus(Lijnen.LIJN8, Bedrijven.QBUZZ, direction));
-		addBus(5, busFactory.createBus(Lijnen.LIJN8, Bedrijven.QBUZZ, direction));
-		addBus(14, busFactory.createBus(Lijnen.LIJN3, Bedrijven.ARRIVA, direction));
-		addBus(16, busFactory.createBus(Lijnen.LIJN4, Bedrijven.ARRIVA, direction));
-		addBus(13, busFactory.createBus(Lijnen.LIJN5, Bedrijven.FLIXBUS, direction));
+		addBus(3, busFactory.createBus(Lijnen.LIJN1, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(5, busFactory.createBus(Lijnen.LIJN2, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(4, busFactory.createBus(Lijnen.LIJN3, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(6, busFactory.createBus(Lijnen.LIJN4, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(3, busFactory.createBus(Lijnen.LIJN5, Bedrijven.FLIXBUS, new Route(direction)));
+		addBus(5, busFactory.createBus(Lijnen.LIJN6, Bedrijven.QBUZZ, new Route(direction)));
+		addBus(4, busFactory.createBus(Lijnen.LIJN7, Bedrijven.QBUZZ, new Route(direction)));
+		addBus(6, busFactory.createBus(Lijnen.LIJN1, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(12, busFactory.createBus(Lijnen.LIJN4, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(10, busFactory.createBus(Lijnen.LIJN5, Bedrijven.FLIXBUS, new Route(direction)));
+		addBus(3, busFactory.createBus(Lijnen.LIJN8, Bedrijven.QBUZZ, new Route(direction)));
+		addBus(5, busFactory.createBus(Lijnen.LIJN8, Bedrijven.QBUZZ, new Route(direction)));
+		addBus(14, busFactory.createBus(Lijnen.LIJN3, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(16, busFactory.createBus(Lijnen.LIJN4, Bedrijven.ARRIVA, new Route(direction)));
+		addBus(13, busFactory.createBus(Lijnen.LIJN5, Bedrijven.FLIXBUS, new Route(direction)));
 	}
 
 //	@Override
